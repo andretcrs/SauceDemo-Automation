@@ -1,0 +1,43 @@
+### Java & Maven ###
+target/
+*.class
+*.jar
+*.war
+*.ear
+!.mvn/wrapper/maven-wrapper.jar
+
+### Allure Report (Essencial) ###
+allure-results/
+allure-report/
+.allure/
+
+### IDEs (IntelliJ, Eclipse, NetBeans, VS Code) ###
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+.vscode/
+
+### Sistema e Logs ###
+*.log
+.DS_Store
+Thumbs.db
+.kotlin
+
+### Configurações Locais ###
+# Descomente a linha abaixo se quiser proteger suas senhas/tokens locais
+# src/test/resources/config.properties

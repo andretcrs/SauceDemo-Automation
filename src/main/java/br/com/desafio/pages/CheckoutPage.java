@@ -31,17 +31,15 @@ public class CheckoutPage extends BasePage {
 
     @Step("Preencher informações de checkout e clicar em Continue")
     public void preencherInformacoes(String nome, String sobrenome, String cep) {
+        esperarElementoEstarVisivel(campoNome);
+
+        driver.findElement(campoNome).clear();
         escrever(campoNome, nome);
+
         escrever(campoSobrenome, sobrenome);
         escrever(campoCep, cep);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
 
-        esperarElementoSerClicavel(botaoContinue);
-        clicarViaJS(botaoContinue);
+        clicar(botaoContinue);
     }
 
 

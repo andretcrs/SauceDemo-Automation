@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CheckoutPage extends BasePage {
 
@@ -42,8 +45,10 @@ public class CheckoutPage extends BasePage {
 
     @Step("Clicar no botão Checkout para iniciar o formulário")
     public void irParaCheckout() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(botaoIrParaCheckout));
         clicar(botaoIrParaCheckout);
-        esperarElementoEstarVisivel(campoNome);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(campoNome));
     }
 
     @Step("Clicar no botão Finish para finalizar a compra")

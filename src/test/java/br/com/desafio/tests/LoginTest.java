@@ -22,8 +22,9 @@ public class LoginTest extends BaseTest {
                 "A URL não condiz com a página de produtos após o login.");
     }
 
-    @Test(description = "Validar login com dados inválida")
+    @Test(description = "Validar login com dados inválidos")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Validar mensagem de erro ao tentar logar com dados inválidos")
     public void deveExibirErroComSenhaInvalida() {
         LoginPage loginPage = new LoginPage(driver);
 

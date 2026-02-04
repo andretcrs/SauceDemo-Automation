@@ -4,6 +4,9 @@ import br.com.desafio.base.BaseTest;
 import br.com.desafio.pages.CheckoutPage;
 import br.com.desafio.pages.LoginPage;
 import br.com.desafio.pages.ProdutosPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import net.datafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,6 +17,8 @@ public class CheckoutTest extends BaseTest {
     private Faker faker = new Faker(new Locale("pt-BR"));
 
     @Test(description = "Validar finalização de compra com sucesso")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Validar a finalização de uma compre que foi finalizada com sucesso")
     public void deveFinalizarCompraComSucesso() {
         new LoginPage(driver).realizarLogin("standard_user", "secret_sauce");
 
@@ -40,6 +45,8 @@ public class CheckoutTest extends BaseTest {
     }
 
     @Test(description = "Validar erro ao tentar avançar sem preencher o sobrenome")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Validar mensagem de erro Last Name is required ao avançar sem preencher o sobrenome ")
     public void deveExibirErroAoFaltarSobrenome() {
         new LoginPage(driver).realizarLogin("standard_user", "secret_sauce");
 

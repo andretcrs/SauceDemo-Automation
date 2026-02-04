@@ -1,10 +1,14 @@
 package br.com.desafio.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CheckoutPage extends BasePage {
 
@@ -24,6 +28,7 @@ public class CheckoutPage extends BasePage {
     protected WebElement esperarElementoSerClicavel(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
     @Step("Preencher informações de checkout e clicar em Continue")
     public void preencherInformacoes(String nome, String sobrenome, String cep) {
         escrever(campoNome, nome);
@@ -42,8 +47,10 @@ public class CheckoutPage extends BasePage {
 
     @Step("Clicar no botão Checkout para iniciar o formulário")
     public void irParaCheckout() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(botaoIrParaCheckout));
         clicar(botaoIrParaCheckout);
-        esperarElementoEstarVisivel(campoNome);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(campoNome));
     }
 
     @Step("Clicar no botão Finish para finalizar a compra")
@@ -63,6 +70,11 @@ public class CheckoutPage extends BasePage {
 
     @Step("Verificar se o ícone do carrinho está vazio")
     public boolean carrinhoEstaVazio() {
-        return driver.findElements(By.className("shopping_cart_badge")).isEmpty();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("shopping_cart_badge")));
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 }

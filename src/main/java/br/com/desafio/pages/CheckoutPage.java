@@ -36,10 +36,13 @@ public class CheckoutPage extends BasePage {
         driver.findElement(campoNome).clear();
         escrever(campoNome, nome);
 
+        driver.findElement(campoSobrenome).clear();
         escrever(campoSobrenome, sobrenome);
+
+        driver.findElement(campoCep).clear();
         escrever(campoCep, cep);
 
-        clicar(botaoContinue);
+        clicarViaJS(botaoContinue);
     }
 
 

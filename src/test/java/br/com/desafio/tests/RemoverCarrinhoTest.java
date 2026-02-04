@@ -13,7 +13,7 @@ public class RemoverCarrinhoTest extends BaseTest {
 
     @Test(description = "Validar a remoção de um item do carrinho na tela de listagem")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Este teste verifica se, ao clicar em 'Remove', o contador do carrinho desaparece.")
+    @Description("Validar se, ao clicar em 'Remove', o contador do carrinho desaparece.")
     public void deveRemoverItemDoCarrinhoComSucesso() {
 
         LoginPage loginPage = new LoginPage(driver);

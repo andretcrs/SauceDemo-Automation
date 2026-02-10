@@ -1,6 +1,7 @@
 package br.com.desafio.tests;
 
 import br.com.desafio.base.BaseTest;
+import br.com.desafio.pages.BasePage;
 import br.com.desafio.pages.CheckoutPage;
 import br.com.desafio.pages.LoginPage;
 import br.com.desafio.pages.ProdutosPage;
@@ -31,7 +32,6 @@ public class CheckoutTest extends BaseTest {
         checkoutPage.irParaCheckout();
 
         String cepLimpo = faker.address().zipCode().replaceAll("[^0-9]", "");
-
         checkoutPage.preencherInformacoes(
                 faker.name().firstName(),
                 faker.name().lastName(),
@@ -46,21 +46,22 @@ public class CheckoutTest extends BaseTest {
 
     @Test(description = "Validar erro ao tentar avançar sem preencher o sobrenome")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Validar mensagem de erro Last Name is required ao avançar sem preencher o sobrenome ")
+    @Description("Validar mensagem de erro Last Name is required ao avançar sem preencher o sobrenome")
     public void deveExibirErroAoFaltarSobrenome() {
         new LoginPage(driver).realizarLogin("standard_user", "secret_sauce");
 
-        driver.get("https://www.saucedemo.com/checkout-step-one.html");
+        ProdutosPage produtosPage = new ProdutosPage(driver);
+        produtosPage.adicionarQualquerProdutoAoCarrinho();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver);
+        checkoutPage.clicarNoCarrinho();
+        checkoutPage.clicarBotaoCheckout();
 
         String nome = faker.name().firstName();
-
         checkoutPage.preencherInformacoes(nome, "", "12345");
 
         String erro = checkoutPage.obterMensagemErro();
-
-        Assert.assertTrue(erro.contains("Last Name is required"),
+        Assert.assertTrue(erro.contains("Error: Last Name is required"),
                 "A mensagem de erro esperada não apareceu. Encontrado: " + erro);
     }
 }

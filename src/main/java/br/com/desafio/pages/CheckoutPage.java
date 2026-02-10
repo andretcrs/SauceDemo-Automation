@@ -1,10 +1,8 @@
 package br.com.desafio.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -77,5 +75,17 @@ public class CheckoutPage extends BasePage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+    private By iconeCarrinho = By.className("shopping_cart_link");
+    private By botaoCheckout = By.cssSelector("[data-test='checkout']");
+
+    @Step("Clicar no ícone do carrinho")
+    public void clicarNoCarrinho() {
+        clicarViaJS(iconeCarrinho);
+    }
+
+    @Step("Clicar no botão Checkout")
+    public void clicarBotaoCheckout() {
+        clicarViaJS(botaoCheckout);
     }
 }

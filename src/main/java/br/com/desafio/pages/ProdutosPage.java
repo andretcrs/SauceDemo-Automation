@@ -101,4 +101,12 @@ public class ProdutosPage extends BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("checkout")));
     }
+    @Step("Adicionar um produto qualquer ao carrinho")
+    public void adicionarQualquerProdutoAoCarrinho() {
+        // Seletor para o primeiro botão "Add to cart" da lista
+        By primeiroProduto = By.xpath("(//button[text()='Add to cart'])[1]");
+
+        esperarElementoEstarVisivel(primeiroProduto);
+        driver.findElement(primeiroProduto).click();
+    }
 }

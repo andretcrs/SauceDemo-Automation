@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DriverManager {
@@ -14,19 +15,31 @@ public class DriverManager {
             WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
+
+            // 1. Desabilita as funcionalidades de segurança que geram o pop-up da imagem
+            // PasswordLeakDetection é a flag específica para o aviso de senha vazada
+            options.addArguments("--disable-features=SafeBrowsingPasswordCheck,PasswordLeakDetection,SafeBrowsing");
+            options.addArguments("--disable-safebrowsing");
             options.addArguments("--remote-allow-origins=*");
 
-            options.addArguments("--disable-features=SafeBrowsingPasswordCheck");
+            // 2. Configurações de preferências para desativar o gerenciador de senhas do perfil
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            prefs.put("password_manager_leak_detection", false);
+            // Desabilita pop-ups de geolocalização, notificações, etc.
+            prefs.put("profile.default_content_setting_values.notifications", 2);
 
+            options.setExperimentalOption("prefs", prefs);
 
-            options.setExperimentalOption("prefs", Map.of(
-                    "credentials_enable_service", false,
-                    "profile.password_manager_enabled", false
-            ));
+            // 3. Evita que o Chrome "lembre" do estado anterior entre os testes
+            options.addArguments("--incognito"); // Modo anônimo é crucial para não acumular lixo de sessão
+            options.addArguments("--no-first-run");
+            options.addArguments("--no-default-browser-check");
 
-
+            // 4. Limpa a flag de automação para o navegador não se comportar de forma "estranha"
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
+            options.setExperimentalOption("useAutomationExtension", false);
 
             if ("true".equals(System.getProperty("headless"))) {
                 options.addArguments("--headless=new");
@@ -44,8 +57,15 @@ public class DriverManager {
 
     public static void quitDriver() {
         if (driver != null) {
-            driver.quit();
-            driver = null;
+            // Importante: deleteAllCookies ajuda a garantir que a próxima sessão (se houver) esteja limpa
+            try {
+                driver.manage().deleteAllCookies();
+                driver.quit();
+            } catch (Exception e) {
+                // Silencia erros ao fechar se o navegador já estiver fechado
+            } finally {
+                driver = null;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 <h1>🛒 SauceDemo Automation Challenge</h1>
 
-<h2>📚 Sobre o Projeto</h2>
+<h2> Sobre o Projeto</h2>
 <p>
 Este repositório contém a automação do fluxo de checkout do site
 <strong>Swag Labs (SauceDemo)</strong>. O projeto foi desenvolvido utilizando
@@ -15,7 +15,7 @@ desde o login até a confirmação do pedido, de forma resiliente e escalável.
 
 <hr/>
 
-<h2>🎯 Objetivos de Aprendizado &amp; Implementação</h2>
+<h2> Objetivos de Aprendizado &amp; Implementação</h2>
 <ul>
   <li>Implementar o padrão <strong>Page Object Model (POM)</strong> para separação de responsabilidades.</li>
   <li>Gestão dinâmica de instâncias através de uma <strong>DriverFactory</strong>.</li>
@@ -29,7 +29,7 @@ desde o login até a confirmação do pedido, de forma resiliente e escalável.
 
 <hr/>
 
-<h2>🛠️ Tecnologias Utilizadas</h2>
+<h2> Tecnologias Utilizadas</h2>
 <ul>
   <li><strong>Java 21</strong></li>
   <li><strong>Selenium WebDriver 4</strong></li>
@@ -42,7 +42,7 @@ desde o login até a confirmação do pedido, de forma resiliente e escalável.
 
 <hr/>
 
-<h2>📁 Estrutura do Projeto</h2>
+<h2> Estrutura do Projeto</h2>
 <p>
 A organização segue a separação entre código de suporte (<code>main</code>)
 e scripts de teste (<code>test</code>):
@@ -65,7 +65,7 @@ src
 
 <hr/>
 
-<h2>💡 Soluções de Engenharia Aplicadas</h2>
+<h2> Soluções de Engenharia Aplicadas</h2>
 <ul>
   <li>
     <strong>BasePage</strong>: Centraliza o uso de <code>WebDriverWait</code> e
@@ -90,7 +90,7 @@ src
 
 <hr/>
 
-<h2>▶️ Pré-requisitos</h2>
+<h2> Pré-requisitos</h2>
 <ul>
   <li>Java 21 ou superior instalado</li>
   <li>Maven configurado no <code>PATH</code></li>
@@ -100,7 +100,7 @@ src
 
 <hr/>
 
-<h2>🚀 Executando os Testes</h2>
+<h2> Executando os Testes</h2>
 
 <p><strong>Clone o repositório:</strong></p>
 <pre>
@@ -118,7 +118,7 @@ mvn clean test
 
 <hr/>
 
-<h2>📊 Relatórios com Allure</h2>
+<h2> Relatórios com Allure</h2>
 <p>Para visualizar os resultados com gráficos e capturas de tela das falhas:</p>
 
 <p><strong>Gerar e abrir em tempo real:</strong></p>
@@ -138,7 +138,7 @@ allure open allure-report
 
 <hr/>
 
-<h2>📌 Boas Práticas Aplicadas</h2>
+<h2> Boas Práticas Aplicadas</h2>
 <ul>
   <li><strong>POM (Page Object Model)</strong>: Facilidade de manutenção</li>
   <li><strong>Singleton / Factory</strong>: Controle rigoroso da instância do navegador</li>

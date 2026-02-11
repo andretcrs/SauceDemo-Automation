@@ -57,12 +57,10 @@ public class DriverManager {
 
     public static void quitDriver() {
         if (driver != null) {
-            // Importante: deleteAllCookies ajuda a garantir que a próxima sessão (se houver) esteja limpa
             try {
                 driver.manage().deleteAllCookies();
                 driver.quit();
             } catch (Exception e) {
-                // Silencia erros ao fechar se o navegador já estiver fechado
             } finally {
                 driver = null;
             }

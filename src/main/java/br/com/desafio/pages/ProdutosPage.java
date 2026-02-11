@@ -77,7 +77,6 @@ public class ProdutosPage extends BasePage {
 
     @Step("Obter quantidade de itens no ícone do carrinho")
     public String obterQuantidadeCarrinho() {
-        // FindElements não lança exceção se estiver vazio, retorna lista vazia
         List<WebElement> elementos = driver.findElements(iconeCarrinhoBadge);
         return elementos.isEmpty() ? "0" : elementos.get(0).getText();
     }
@@ -103,7 +102,6 @@ public class ProdutosPage extends BasePage {
     }
     @Step("Adicionar um produto qualquer ao carrinho")
     public void adicionarQualquerProdutoAoCarrinho() {
-        // Seletor para o primeiro botão "Add to cart" da lista
         By primeiroProduto = By.xpath("(//button[text()='Add to cart'])[1]");
 
         esperarElementoEstarVisivel(primeiroProduto);
